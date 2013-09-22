@@ -18,7 +18,6 @@ class Login extends Form
         parent::__construct();
                 
         $this->setAttribute('method', 'POST');
-        $this->setAttribute('action', 'login');
         
         //MYTODO get rid of the attributes key once
         //it's determined we don't need them

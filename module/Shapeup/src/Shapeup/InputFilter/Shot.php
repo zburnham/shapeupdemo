@@ -11,7 +11,7 @@ namespace Shapeup\InputFilter;
 use Zend\InputFilter\Factory;
 use Zend\InputFilter\InputFilter;
 
-class Projectile extends InputFilter
+class Shot extends InputFilter
 {
     public function __construct()
     {
@@ -54,6 +54,10 @@ class Projectile extends InputFilter
                     'name' => 'Digits'
                 ),
             ),
+            // MYTODO this is kind of sloppy, it's
+            // exploiting php's implicit casting -
+            // the string is being cast to an int
+            // when the comparison happens.
             'validators' => array(
                 array(
                     'name' => 'GreaterThan',

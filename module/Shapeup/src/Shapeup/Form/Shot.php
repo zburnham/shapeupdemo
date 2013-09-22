@@ -12,7 +12,7 @@ namespace Shapeup\Form;
 use Zend\Form\Form;
 use Zend\Form\FormInterface;
 
-class Projectile extends Form
+class Shot extends Form
 {
     public function __construct()
     {

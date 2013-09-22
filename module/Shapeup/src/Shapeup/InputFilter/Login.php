@@ -17,6 +17,8 @@ class Login extends InputFilter
     {
         $factory = new Factory;
         
+        //MYTODO Need to figure out string length values.
+        
         //MYTODO I'm repeating myself way too often
         //when defining filters on these inputs.
         //Should probably subclass Zend\InputFilter\Factory.
@@ -49,7 +51,15 @@ class Login extends InputFilter
                     ),
             ),
             'validators' => array(
-                'name' => '\Shapeup\Validator\Credentials',
+                array(
+                    'name' => '\Shapeup\Validator\Credentials',
+                    ),
+                array(
+                    'name' => 'Regex',
+                    'options' => array(
+                        'pattern' => '|^[A-Za-Z0-9\p{P}\s]+$|',
+                    ),
+                ),
             ),
         ));
         $this->add($password);
