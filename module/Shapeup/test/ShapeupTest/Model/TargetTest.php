@@ -29,8 +29,11 @@ class TargetTest extends AbstractModelTest
     public function propertiesToTest()
     {
         return array(
+            array('targetId', 1),
+            array('userId', 3),
             array('size', 5),
             array('position', 450),
+            array('isDestroyed', FALSE),
         );
     }
     

@@ -32,6 +32,13 @@ class Shot
     protected $velocity;
     
     /**
+     * The initial height of the howitzer.
+     *
+     * @var int
+     */
+    protected $initialHeight;
+    
+    /**
      * Did the shot hit the target?
      *
      * @var bool
@@ -78,7 +85,6 @@ class Shot
         return $this;
     }
 
-        
     /**
      * @return float
      */
@@ -93,7 +99,7 @@ class Shot
      */
     public function setAngle($angle)
     {
-        $this->angle = $angle;
+        $this->angle = round($angle, 2);
         return $this;
     }
 
@@ -114,7 +120,26 @@ class Shot
         $this->velocity = $velocity;
         return $this;
     }
+    
+    /**
+     * @return float
+     */
+    public function getInitialHeight()
+    {
+        return $this->initialHeight;
+    }
 
+    /**
+     * @param float $initialHeight
+     * @return \Shapeup\Model\Shot
+     */
+    public function setInitialHeight($initialHeight)
+    {
+        $this->initialHeight = $initialHeight;
+        return $this;
+    }
+
+    
     /**
      * @return bool
      */
