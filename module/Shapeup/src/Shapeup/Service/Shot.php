@@ -8,37 +8,67 @@
 
 namespace Shapeup\Service;
 
-use Shapeup\Model\Shot;
+//use Shapeup\Model\Shot;
 use Shapeup\Service\DistanceCalculations;
 
-class Shot extends AbstractServiceClass
+//class Shot extends AbstractServiceClass
+class Shot
 {
+
+    public function __construct()
+    {
+        //echo "Loading Shot.." . debug_backtrace();
+    }
     /**
      * Service class that does the math.
      * 
      * @var \Shapeup\Service\DistanceCalculations
      */
     protected $distanceCalculator;
-    
+
     public function getLandingLocation()
     {
-        // determine where the shell landed
+        $calc = $this->getDistanceCalculator();
+        $shot = $this->getModel();
+
+        $calc->setAngle($model->getAngle())
+                ->setInitialVelocity($model->getVelocity())
+                // MYTODO refactor 'G' for consistency
+                ->setG($model->getG())
+                ->setInitialAltitude($model->getInitialAltitude());
+        return $calc->calculateDistance();
     }
 
+    /**
+     * Did the shot hit the target?
+     * @return void
+     */
     public function markHit()
     {
-        // Mark the shot as having hit the target
+        $this->getModel()->setWasAHit(TRUE);
     }
-    
+
     /**
      * Persists the information from the model.
+     * 
+     * @return int
      */
     public function save()
     {
-        // assemble data
-        parent::save($data);
+        $model = $this->getModel();
+        $data = array(
+            'angle' => $model->getAngle(),
+            'velocity' => $model->getVelocity(),
+            'initialAltitude' => $model->getInitialAltitude(),
+            'gravity' => $model->getGravity(),
+            'wasAHit' => $model->getWasAHit(),
+            'targetId' => $model->getTargetId(),
+            'userId' => $model->getUserId(),
+            'userAgentString' => $model->getUserAgentString(),
+        );
+        return parent::save($data);
     }
-    
+
     /**
      * Loads persisted information.
      * 
@@ -46,10 +76,12 @@ class Shot extends AbstractServiceClass
      */
     public function load($shotId)
     {
+        if (!is_int($shotId)) {
+            //throw new \InvalidArgumentException('Invalid value given for shot ID.');
+        }
         parent::load($shotId);
     }
-     
-    
+
     /**
      * 
      * @return \Shapeup\Service\DistanceCalculator
@@ -68,4 +100,5 @@ class Shot extends AbstractServiceClass
         $this->distanceCalculator = $distanceCalculator;
         return $this;
     }
+
 }

@@ -8,7 +8,7 @@
 
 namespace Shapeup\Service;
 
-use Shapeup\Model\Target;
+//use Shapeup\Model\Target;
 
 class Target extends AbstractServiceClass
 {
@@ -26,24 +26,73 @@ class Target extends AbstractServiceClass
     }   
     
     /**
+     * Persist the target in the database.
+     * 
+     * @return int
+     */
+    public function save()
+    {
+        $model = $this->getModel();
+        
+        $data = array(
+            'userId' => $model->getUserId(),
+            'size' => $model->getSize(),
+            'position' => $model->getPosition(),
+            'isDestroyed' => $model->getIsDestroyed(),
+        );
+        return parent::save($data);
+    }
+    
+    /**
+     * Persists the information in the database.
+     * 
+     * @param int $targetId
+     */
+    public function load($targetId)
+    {
+        if (!is_int($targetId)) {
+            //throw new \InvalidArgumentException('Invalid target ID given.');
+        }
+        parent::load($targetId);
+    }
+    
+    /**
      * Marks the target as destroyed in the database (marks boolean isDestroyed
      * for this target).
      * 
-     * @return bool Success/failure of update
+     * @param int $targetId
+     * @returns int 
      */
-    public function markDestroyed()
+    public function markDestroyed($targetId)
     {
-        // check for targetId
-        // update database with new destruction info
-        // return return value from ->update()
+        $db = $this->getDb();
+        $data = array('isDestroyed' => '1');
+        $result = $db->update($data, array('targetId' => $targetId));
+        if ($result->count() > 1) {
+            throw new \Exception('Wuhoh, more than one target got destroyed!');
+        }
     }
     
+    /**
+     * Determines if the shot landed on the target.
+     * 
+     * @param float $landingLocation
+     * @return boolean
+     */
     public function getResult($landingLocation)
     {
-        // compares $landingLocation to see if
-        // it's within the bounds of the target
-        // based on landing location and target
-        // size
+        $target = $this->getModel();
+        $size = $target->getSize();
+        $location = $target->getLocation();
+        $range = array(
+            'near' => $location - $size,
+            'far' => $location + $size,
+            );
+        
+        if ($landingLocation > $near && $landingLocation < $far) {
+            return TRUE;
+        }
+        return FALSE;
     }
     
     /**
@@ -55,5 +104,11 @@ class Target extends AbstractServiceClass
     public function userHasCurrentTarget($userId)
     {
         // checks database for a non-destroyed Target
+        $db = $this->getDb();
+        $result = $db->select(array('userId' => $userId, 'isDestroyed' => '0'));
+        if (0 < $result->count()) {
+            return TRUE;
+        }
+        return FALSE;
     }
 }

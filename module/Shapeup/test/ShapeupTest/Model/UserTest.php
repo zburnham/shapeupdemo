@@ -62,7 +62,7 @@ class UserTest extends AbstractModelTest
      * @param \Shapeup\Model\User $object
      * @return \ShapeupTest\Model\UserTest
      */
-    public function setObject(\Shapeup\Model\User $object)
+    public function setObject($object)
     {
         $this->object = $object;
         return $this;

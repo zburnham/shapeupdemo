@@ -25,6 +25,13 @@ class AbstractServiceClass
     protected $db;
     
     /**
+     *
+     * @var \Zend\ServiceManager\ServiceManager
+     */
+    //MYTODO inject this when it's asked for from the service manager.
+    protected $sm;
+    
+    /**
      * Instance of corresponding Model class.
      *
      * @var mixed
@@ -67,6 +74,13 @@ class AbstractServiceClass
     protected $isDataValidated = FALSE;
     
     /**
+     * The last auto-incremented value created.
+     *
+     * @var int
+     */
+    protected $lastInsertId;
+    
+    /**
      * Hydrates the model.
      * 
      * @param array $data
@@ -79,7 +93,14 @@ class AbstractServiceClass
         return $model;
     }
     
-    public function save($data) 
+    /**
+     * Persists the information in the databse.
+     * 
+     * @param array $data
+     * @return int
+     * @throws \Exception
+     */
+    public function save(array $data) 
     {
         if (!$this->getIsDataValidated()) {
             if (!$this->getInputFilter()->isValid($data)) {
@@ -88,7 +109,7 @@ class AbstractServiceClass
                 $this->setIsDataValidated(TRUE);
             }
         }
-        $this->getDb()->insert($data);
+        return $this->getDb()->insert($data);
     }
     
     /**
@@ -100,11 +121,14 @@ class AbstractServiceClass
     public function load($value, $field = NULL) 
     {
         //This is a little too much magic for me, really.
+        $db = $this->getDb();
         if (NULL === $field) {
             $tableName = strtolower($this->getDb()->getTable());
             $field = rtrim($tableName,'s') . 'Id';
         }
-        $result = $this->getDb()->select(array($field => $value));
+        $result = $db->select(array($field => $value));
+        
+        $this->setLastInsertId($db->getLastInsertValue());
         $this->hydrate($result->toArray());
     }
     
@@ -125,7 +149,26 @@ class AbstractServiceClass
         $this->db = $db;
         return $this;
     }
+    
+    /**
+     * @return \Zend\ServiceManager\ServiceManager
+     */
+    public function getSm()
+    {
+        return $this->sm;
+    }
 
+    /**
+     * @param \Zend\ServiceManager\ServiceManager\ $sm
+     * @return \Shapeup\Service\AbstractServiceClass
+     */
+    public function setSm($sm)
+    {
+        $this->sm = $sm;
+        return $this;
+    }
+
+    
     /**
      * @return mixed
      */
@@ -233,6 +276,24 @@ class AbstractServiceClass
     public function setIsDataValidated($isDataValidated)
     {
         $this->isDataValidated = $isDataValidated;
+        return $this;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getLastInsertId()
+    {
+        return $this->lastInsertId;
+    }
+
+    /**
+     * @param int $lastInsertId
+     * @return \Shapeup\Service\AbstractServiceClass
+     */
+    public function setLastInsertId($lastInsertId)
+    {
+        $this->lastInsertId = $lastInsertId;
         return $this;
     }
 }

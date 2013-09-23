@@ -6,3 +6,4 @@ extras/documentation
 
 /composer.lock
 /vendor/
+/module/Shapeup/config/module.config.php

@@ -9,7 +9,7 @@
 namespace ShapeupTest\Service;
 
 use Shapeup\Model;
-use Shapeup\Service;
+use Shapeup\Service\Target;
 
 class TargetTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,8 +24,7 @@ class TargetTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         
-        // These should really come from the ServiceManager
-        $this->setObject(new Service\Target);
+        $this->setObject(new Target);
     }
     
     public function testMarkDestroyed()

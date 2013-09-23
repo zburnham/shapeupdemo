@@ -13,7 +13,7 @@ use Shapeup\Form\Shot;
 class ShotTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Shapeup\Form\Shot
+     * @var \Shapeup\Form\Shot
      */
     protected $object;
     
@@ -91,7 +91,7 @@ class ShotTest extends \PHPUnit_Framework_TestCase
      * @param \ShapeupTest\Form\Shapeup\Form\Shot $object
      * @return \ShapeupTest\Form\ProjectileTest
      */
-    public function setObject(Shapeup\Form\Shot $object)
+    public function setObject(Shot $object)
     {
         $this->object = $object;
         return $this;

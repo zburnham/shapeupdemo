@@ -1,7 +1,7 @@
 <?php
 /**
- * Projectile.php
- * InputFilter for use in conjunction with the Projectile form.
+ * Shot.php
+ * InputFilter for use in conjunction with the Shot form.
  * 
  * @author Zachary Burnham <zburnham@gmail.com>
  */

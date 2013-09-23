@@ -13,7 +13,7 @@ use Shapeup\InputFilter\Shot;
 class ShotTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Shapeup\InputFilter\Shot 
+     * @var \Shapeup\InputFilter\Shot 
      */
     protected $object;
     

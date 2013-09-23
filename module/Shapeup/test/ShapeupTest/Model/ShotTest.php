@@ -38,7 +38,8 @@ class ShotTest extends AbstractModelTest
             array('targetId', 1324),
             array('userId', 1837),
             array('userAgentString', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0'),
-        );
+            array('gravity', 10),
+            array('initialAltitude', 3));
     }
     
     /**
@@ -53,7 +54,7 @@ class ShotTest extends AbstractModelTest
      * @param \ShapeupTest\Model\Shapeup\Model\Shot $object
      * @return \ShapeupTest\Model\ShotTest
      */
-    public function setObject(Shapeup\Model\Shot $object)
+    public function setObject($object)
     {
         $this->object = $object;
         return $this;

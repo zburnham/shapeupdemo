@@ -6,15 +6,22 @@
  * @author Zachary Burnham zburnham@gmail.com
  */
 
-namespace ShapeupTest\Service;
+namespace ShapeupTest\ServiceTest;
 
 use Shapeup\Model;
-use Shapeup\Service;
+use Shapeup\Service\User;
 
 use Zend\Session\SessionManager;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
+    
+    public function setUp()
+    {
+        parent::setUp();
+        
+        $this->setObject(new User);
+    }
     /**
      * Instance of class being tested.
      *

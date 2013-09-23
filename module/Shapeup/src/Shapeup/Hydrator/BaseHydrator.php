@@ -8,7 +8,7 @@
 
 namespace Shapeup\Hydrator;
 
-use Zend\Stlib\Hydrator\ClassMethods;
+use Zend\Stdlib\Hydrator\ClassMethods;
 
 class BaseHydrator extends ClassMethods
 {

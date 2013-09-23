@@ -49,7 +49,7 @@ class TargetTest extends AbstractModelTest
      * @param \Shapeup\Model\Target $object
      * @return \ShapeupTest\Model\TargetTest
      */
-    public function setObject(\Shapeup\Model\Target $object)
+    public function setObject($object)
     {
         $this->object = $object;
         return $this;

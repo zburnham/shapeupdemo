@@ -38,7 +38,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::hydrate
-     * @todo   Implement testHydrate().
+     * odoo   Implement testHydrate().
      */
     public function testHydrate()
     {
@@ -52,7 +52,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
             'userAgentString' => 'oiajfpoaiwepo',
             'userId' => 3,
         );
-        $this->getObject()->hydrate();
+        $this->object->hydrate();
         $model = $this->object->getModel();
         foreach ($data as $key => $value) {
             $getMethod = 'get' . ucfirst(($key));
@@ -63,7 +63,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::save
-     * @todo   Implement testSave().
+     * //MYTODO   Implement testSave().
      */
     public function testSave()
     {
@@ -75,7 +75,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::load
-     * @todo   Implement testLoad().
+     * //MYTODO   Implement testLoad().
      */
     public function testLoad()
     {
@@ -88,7 +88,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::getDb
-     * @todo   Implement testGetDb().
+     * //MYTODO   Implement testGetDb().
      */
     public function testGetDb()
     {
@@ -101,7 +101,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::setDb
-     * @todo   Implement testSetDb().
+     * //MYTODO   Implement testSetDb().
      */
     public function testSetDb()
     {
@@ -113,7 +113,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::getModel
-     * @todo   Implement testGetModel().
+     * //MYTODO   Implement testGetModel().
      */
     public function testGetModel()
     {
@@ -125,7 +125,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::setModel
-     * @todo   Implement testSetModel().
+     * //MYTODO   Implement testSetModel().
      */
     public function testSetModel()
     {
@@ -137,7 +137,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::getHydrator
-     * @todo   Implement testGetHydrator().
+     * //MYTODO   Implement testGetHydrator().
      */
     public function testGetHydrator()
     {
@@ -149,7 +149,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::setHydrator
-     * @todo   Implement testSetHydrator().
+     * //MYTODO   Implement testSetHydrator().
      */
     public function testSetHydrator()
     {
@@ -161,7 +161,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::getForm
-     * @todo   Implement testGetForm().
+     * //MYTODO   Implement testGetForm().
      */
     public function testGetForm()
     {
@@ -173,7 +173,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::setForm
-     * @todo   Implement testSetForm().
+     * //MYTODO   Implement testSetForm().
      */
     public function testSetForm()
     {
@@ -185,7 +185,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::getInputFilter
-     * @todo   Implement testGetInputFilter().
+     * //MYTODO   Implement testGetInputFilter().
      */
     public function testGetInputFilter()
     {
@@ -197,7 +197,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::setInputFilter
-     * @todo   Implement testSetInputFilter().
+     * //MYTODO   Implement testSetInputFilter().
      */
     public function testSetInputFilter()
     {
@@ -209,7 +209,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::getServiceManager
-     * @todo   Implement testGetServiceManager().
+     * //MYTODO   Implement testGetServiceManager().
      */
     public function testGetServiceManager()
     {
@@ -221,7 +221,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::setServiceManager
-     * @todo   Implement testSetServiceManager().
+     * //MYTODO   Implement testSetServiceManager().
      */
     public function testSetServiceManager()
     {
@@ -233,7 +233,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::getIsDataValidated
-     * @todo   Implement testGetIsDataValidated().
+     * //MYTODO   Implement testGetIsDataValidated().
      */
     public function testGetIsDataValidated()
     {
@@ -245,7 +245,7 @@ class AbstractServiceClassTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Shapeup\Service\AbstractServiceClass::setIsDataValidated
-     * @todo   Implement testSetIsDataValidated().
+     * //MYTODO   Implement testSetIsDataValidated().
      */
     public function testSetIsDataValidated()
     {

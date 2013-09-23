@@ -36,14 +36,21 @@ class Shot
      *
      * @var int
      */
-    protected $initialHeight;
+    protected $initialAltitude;
+    
+    /**
+     * Local gravitational force.
+     *
+     * @var float
+     */
+    protected $gravity;
     
     /**
      * Did the shot hit the target?
      *
      * @var bool
      */
-    protected $wasAHit;
+    protected $wasAHit = FALSE;
     
     /**
      * The ID of the target the shot was aiming for.
@@ -61,7 +68,8 @@ class Shot
     protected $userAgentString;
     
     /**
-     * 
+     * ID of user taking the shot.
+     * Foreign key.
      *
      * @var int
      */
@@ -124,22 +132,39 @@ class Shot
     /**
      * @return float
      */
-    public function getInitialHeight()
+    public function getInitialAltitude()
     {
-        return $this->initialHeight;
+        return $this->initialAltitude;
     }
 
     /**
      * @param float $initialHeight
      * @return \Shapeup\Model\Shot
      */
-    public function setInitialHeight($initialHeight)
+    public function setInitialAltitude($initialHeight)
     {
-        $this->initialHeight = $initialHeight;
+        $this->initialAltitude = $initialHeight;
         return $this;
     }
 
-    
+    /**
+     * @return float
+     */
+    public function getGravity()
+    {
+        return $this->gravity;
+    }
+
+    /**
+     * @param float $gravity
+     * @return \Shapeup\Model\Shot
+     */
+    public function setGravity($gravity)
+    {
+        $this->gravity = $gravity;
+        return $this;
+    }
+        
     /**
      * @return bool
      */

@@ -16,8 +16,10 @@ class Shot extends Form
 {
     public function __construct()
     {
+        parent::__construct();
+
         $this->setAttribute('method', 'POST');
-        $this->setAttribute('action', 'fire');
+        $this->setAttribute('action', 'boom');
         
         $this->add(array(
             'type' => 'Zend\Form\Element\Text',
