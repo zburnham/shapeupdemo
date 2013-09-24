@@ -1,31 +1,31 @@
 <?php
 /**
- * LoginTest.php
- * Test suite for the Login form class.
+ * RegosterTest.php
+ * Test suite for the \Shapeup\Form\Register class.
+ * 
+ * @author Zachary Burnham zburnham@gmail.com
  */
+
 namespace ShapeupTest\Form;
 
-use Shapeup\Form\Login;
+use Shapeup\Form\Register;
 
-class LoginTest extends \PHPUnit_Framework_TestCase
+class RegisterTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Register instance.
      *
-     * @var Shapeup\Form\Login
+     * @var \Shapeup\Form\Register
      */
     protected $object;
-    
-    /**
-     * Mock Shapeup\InputFilter\Login
-     */
-    protected $inputFilter;
     
     public function setUp()
     {
         parent::setUp();
         
-        $this->setObject(new Login);
+        $this->setObject(new Register);
     }
+    
     /**
      * Reality check.
      */
@@ -56,6 +56,18 @@ class LoginTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
                 '\Zend\Form\Element\Password', 
                 $elements['password']);
+    }
+    
+    /**
+     * Does it have a confirmPassword element?
+     */
+    public function testHasConfirmPassword()
+    {
+        $elements = $this->getObject()->getElements();
+        $this->assertArrayHasKey('confirmPassword', $elements);
+        $this->assertInstanceOf(
+                '\Zend\Form\Element\Password', 
+                $elements['confirmPassword']);
     }
     
     /**
@@ -92,7 +104,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @return Shapeup\Form\Login
+     * @return \Shapeup\Form\Register
      */
     public function getObject()
     {
@@ -100,30 +112,12 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param \Shapeup\Form\Login $object
-     * @return \ShapeupTest\Form\LoginTest
+     * @param \Shapeup\Form\Register $object
+     * @return \ShapeupTest\Form\RegisterTest
      */
-    public function setObject(Login $object)
+    public function setObject(Register $object)
     {
         $this->object = $object;
-        return $this;
-    }
-
-    /**
-     * @return Mock of Shapeup\InputFilter\Login
-     */
-    public function getInputFilter()
-    {
-        return $this->inputFilter;
-    }
-
-    /**
-     * @param Mock $inputFilter
-     * @return \ShapeupTest\Form\LoginTest
-     */
-    public function setInputFilter($inputFilter)
-    {
-        $this->inputFilter = $inputFilter;
         return $this;
     }
 }

@@ -1,0 +1,12 @@
+<?php
+$form = $this->form;
+?>
+Please login.
+<?=$this->form()->openTag($form);?>
+<?=$this->formRow($form->get('username')); ?><br>
+<?=$this->formRow($form->get('password')); ?><br>
+<?=$this->formRow($form->get('csrf')); ?><br>
+<?=$this->formRow($form->get('submit')); ?><br>
+<?=$this->form()->closeTag($form); ?>
+
+

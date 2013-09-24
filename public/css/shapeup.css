@@ -1,0 +1,46 @@
+/* 
+    Document   : shapeup
+    Created on : Sep 23, 2013, 5:37:39 PM
+    Author     : zburnham
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#header {
+    height: 200px;
+    width: 100%;
+    text-align: center;
+}
+
+#headerleft {
+    float: left;
+    height: 200px;
+    width: 200px;
+    text-align: left;
+}
+
+#headercenter {
+    text-align: center;
+}
+
+#headerright {
+    float: right;
+    height: 200px;
+    width: 200px;
+    text-align: right;
+}
+
+#body-content {
+    width: 100%;
+}
+
+#howitzer {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+

@@ -27,20 +27,20 @@ class ShotTest extends \PHPUnit_Framework_TestCase
         $this->setObject(new Shot);
     }
     
-//    public function testMarkHit()
-//    {
-//        $service = $this->getObject();
-//        $service->setModel(new Model\Shot);
-//        $service->markHit();
-//        $this->assertTrue($this->getObject()->getModel()->getWasAHit());
-//    }
+    public function testMarkHit()
+    {
+        $service = $this->getObject();
+        $service->setModel(new Model\Shot);
+        $service->markHit();
+        $this->assertTrue($this->getObject()->getModel()->getWasAHit());
+    }
     
-//    public function testGetLandingLocation()
-//    {
-//        $service = $this->getObject();
-//        // need to mock DistanceCalculations object
-//        $this->markTestIncomplete('Mocking');
-//    }
+    public function testGetLandingLocation()
+    {
+        $service = $this->getObject();
+        // need to mock DistanceCalculations object
+        $this->markTestIncomplete('Mocking');
+    }
     
     public function testSanity()
     {

@@ -34,7 +34,7 @@ class Shot
     /**
      * The initial height of the howitzer.
      *
-     * @var int
+     * @var float
      */
     protected $initialAltitude;
     

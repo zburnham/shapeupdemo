@@ -1,25 +1,25 @@
 <?php
 /**
- * Login.php
- * Form for logging in to the system.
- * 
+ * Register.php
+ * Form to accept user input to create a new user.
+ *
  * @author Zachary Burnham
  */
 
 namespace Shapeup\Form;
 
-use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\Form\FormInterface;
 
-class Login extends Form
+class Register extends Form
 {
     //MYTODO remember to inject InputFilter
-    public function __construct($name = NULL, $options = array())
+    public function __construct()
     {
         parent::__construct();
-                
+        
         $this->setAttribute('method', 'POST');
+        //MYTODO remember to give these actions in the controller.
         
         $this->add(array(
             'type' => 'Zend\Form\Element\Text',
@@ -28,12 +28,26 @@ class Login extends Form
                 'label' => 'Username: ',
             ),
         ));
-        
+             
         $this->add(array(
             'type' => 'Zend\Form\Element\Password',
+//            'attributes' => array(
+//                'type' => 'text',
+//            ),
             'name' => 'password',
             'options' => array(
                 'label' => 'Password: '
+            ),
+        ));
+        
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Password',
+//            'attributes' => array(
+//                'type' => 'text',
+//            ),
+            'name' => 'confirmPassword',
+            'options' => array(
+                'label' => 'Confirm password: '
             ),
         ));
         
@@ -50,6 +64,7 @@ class Login extends Form
         $this->add(array(
             'type' => 'Zend\Form\Element\Submit',
             'name' => 'submit',
+            
             'attributes' => array(
                 'value' => 'Submit',
             ),

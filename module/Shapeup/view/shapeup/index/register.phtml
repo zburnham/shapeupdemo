@@ -1,0 +1,17 @@
+<?php $form = $this->form; ?>
+<?php if ($this->failure) : ?>
+There were errors with the registration:
+<?php print_r($form->getMessages(), TRUE); ?>
+<?php else : ?>
+Please register.
+<?php endif; ?>
+<?php if (NULL != $form): ?>
+<?=$this->form()->openTag($form); ?>
+
+<?=$this->formRow($form->get('username')); ?><br>
+<?=$this->formRow($form->get('password')); ?><br>
+<?=$this->formRow($form->get('confirmPassword')); ?><br>
+<?=$this->formRow($form->get('submit')); ?><br>
+<?=$this->formRow($form->get('csrf')); ?><br>
+<?=$this->form()->closeTag($form); ?>
+<?php endif; ?>

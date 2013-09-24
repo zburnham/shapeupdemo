@@ -43,4 +43,16 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'view_helpers' => array(
+        'factories' => array(
+            'top5' => function ($sm) {
+                $top5 = new \Shapeup\View\Helper\Top5;
+                $top5->setServiceManager($sm);
+                return $top5;
+            },
+            'login' => function ($sm) {
+                return new \Shapeup\View\Helper\Login;
+            },
+        ),
+    ),
 );

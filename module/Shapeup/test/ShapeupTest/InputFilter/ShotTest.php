@@ -44,7 +44,7 @@ class ShotTest extends \PHPUnit_Framework_TestCase
             'submit',
         );
         
-        $inputs = $this->getObject->getInputs();
+        $inputs = $this->getObject()->getInputs();
         $testKeys = array_keys($inputs);
         $this->assertSame($testArray, $testKeys);
     }
@@ -53,7 +53,7 @@ class ShotTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('velocity', '80', TRUE),
-            array('velocity', 'adf92387' , FALSE),
+            array('velocity', 'adf92387' ,FALSE),
             array('angle', '45', TRUE),
             array('angle', '-5', FALSE),
             array('angle', '180', FALSE),
@@ -75,14 +75,46 @@ class ShotTest extends \PHPUnit_Framework_TestCase
         $if = $this->getObject();
         $data = array($field => $value);
         $if->setData($data);
+        $this->assertFalse($if->isValid()); // we never give it a complete dataset
         $invalidInputs = $if->getInvalidInput();
-        $this->assertIdentical(
-                !$result, // Yes, you read that right.  
-                // Counter-intuitive, I know, but it
-                // makes providing easily understandable
-                // data sets much easier.
+        $this->assertSame(
+                !$result, 
                 array_key_exists($field, $invalidInputs)
                 );
+    }
+    
+    public function errorMessages()
+    {
+        return array(
+            array(\Zend\Validator\Regex::NOT_MATCH,
+                'This field only accepts numbers.',
+                ),
+            array(\Zend\Validator\GreaterThan::NOT_GREATER_INCLUSIVE,
+                'Enter a number greater that or equal to 0.',
+                ),
+            array(\Zend\Validator\LessThan::NOT_LESS_INCLUSIVE,
+                'Enter a number less than or equal to 90.',
+                ),
+        );
+    }
+    
+    /**
+     * Check the custom error messages.
+     * 
+     * @dataProvider errorMessages
+     * @param string $constant  The error message index.
+     * @param string $value The custom error message. 
+     */
+    public function testCustomValidationErrorMessages($constant, $value)
+    {
+        $validators = $this->getObject()->getInputs()['angle']->getValidatorChain()->getValidators();
+        $errorMessages = array();
+        foreach ($validators as $key => $validator) {
+            $errorMessages = array_merge($errorMessages, $validator['instance']->getMessageTemplates());
+        }
+        $this->assertTrue(array_key_exists($constant,
+                $errorMessages));
+        $this->assertSame($value, $errorMessages[$constant]);
     }
     
     /**
@@ -97,7 +129,7 @@ class ShotTest extends \PHPUnit_Framework_TestCase
      * @param \ShapeupTest\InputFilter\Shapeup\InputFilter\Shot $object
      * @return \ShapeupTest\InputFilter\ProjectileTest
      */
-    public function setObject(Shapeup\InputFilter\Login $object)
+    public function setObject(Shot $object)
     {
         $this->object = $object;
         return $this;

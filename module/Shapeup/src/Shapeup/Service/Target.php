@@ -28,18 +28,20 @@ class Target extends AbstractServiceClass
     /**
      * Persist the target in the database.
      * 
+     * @param array $data
      * @return int
      */
-    public function save()
+    public function save(array $data = array())
     {
         $model = $this->getModel();
-        
-        $data = array(
-            'userId' => $model->getUserId(),
-            'size' => $model->getSize(),
-            'position' => $model->getPosition(),
-            'isDestroyed' => $model->getIsDestroyed(),
-        );
+        if (empty($data)){
+            $data = array(
+                'userId' => $model->getUserId(),
+                'size' => $model->getSize(),
+                'position' => $model->getPosition(),
+                'isDestroyed' => $model->getIsDestroyed(),
+            );
+        }
         return parent::save($data);
     }
     
@@ -48,7 +50,7 @@ class Target extends AbstractServiceClass
      * 
      * @param int $targetId
      */
-    public function load($targetId)
+    public function load($targetId, $field = 'targetId')
     {
         if (!is_int($targetId)) {
             //throw new \InvalidArgumentException('Invalid target ID given.');
@@ -83,13 +85,14 @@ class Target extends AbstractServiceClass
     {
         $target = $this->getModel();
         $size = $target->getSize();
-        $location = $target->getLocation();
+        $position = $target->getPosition();
         $range = array(
-            'near' => $location - $size,
-            'far' => $location + $size,
+            'near' => $position - $size,
+            'far' => $position + $size,
             );
         
-        if ($landingLocation > $near && $landingLocation < $far) {
+        if ($landingLocation > $range['near'] 
+                && $landingLocation < $range['far']) {
             return TRUE;
         }
         return FALSE;

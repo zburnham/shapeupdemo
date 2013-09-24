@@ -50,9 +50,6 @@ class Shot extends InputFilter
                 array(
                     'name' => 'StringTrim'
                 ),
-                array(
-                    'name' => 'Digits'
-                ),
             ),
             // MYTODO this is kind of sloppy, it's
             // exploiting php's implicit casting -
@@ -60,10 +57,24 @@ class Shot extends InputFilter
             // when the comparison happens.
             'validators' => array(
                 array(
+                    'name' => 'Regex',
+                    'options' => array(
+                        'pattern' => '|^[0-9]{1,2}$|',
+                        'messages' => array(
+                            \Zend\Validator\Regex::NOT_MATCH=>
+                            'This field only accepts numbers.',
+                        ),
+                    ),
+                ),
+                array(
                     'name' => 'GreaterThan',
                     'options' => array(
                         'min' => 0,
                         'inclusive' => TRUE,
+                        'messages' => array(
+                            \Zend\Validator\GreaterThan::NOT_GREATER_INCLUSIVE=>
+                            'Enter a number greater that or equal to 0.'
+                        ),
                     ),
                 ),
                 array(
@@ -71,11 +82,29 @@ class Shot extends InputFilter
                     'options' => array(
                         'max' => 90,
                         'inclusive' => TRUE,
+                        'messages' => array(
+                            \Zend\Validator\LessThan::NOT_LESS_INCLUSIVE =>
+                            'Enter a number less than or equal to 90.'
+                        ),
                     ),
                 ),
             ),
         ));
         $this->add($angle);
+        
+        $csrf = $factory->createInput(array(
+            'name' => 'csrf',
+            'filters' => array(
+                array('name' => 'StringTrim'),
+                array('name' => 'StripTags'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'Csrf',
+                ),
+            )
+        ));
+        $this->add($csrf);
         
         $submit = $factory->createInput(array(
             'name' => 'submit',

@@ -14,6 +14,7 @@ use Zend\Form\FormInterface;
 
 class Shot extends Form
 {
+    //MYTODO remember to inject InputFilter
     public function __construct()
     {
         parent::__construct();

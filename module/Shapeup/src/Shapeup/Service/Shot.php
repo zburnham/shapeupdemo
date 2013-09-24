@@ -11,8 +11,7 @@ namespace Shapeup\Service;
 //use Shapeup\Model\Shot;
 use Shapeup\Service\DistanceCalculations;
 
-//class Shot extends AbstractServiceClass
-class Shot
+class Shot extends AbstractServiceClass
 {
 
     public function __construct()
@@ -51,21 +50,24 @@ class Shot
     /**
      * Persists the information from the model.
      * 
+     * @param array $data
      * @return int
      */
-    public function save()
+    public function save(array $data = array())
     {
         $model = $this->getModel();
-        $data = array(
-            'angle' => $model->getAngle(),
-            'velocity' => $model->getVelocity(),
-            'initialAltitude' => $model->getInitialAltitude(),
-            'gravity' => $model->getGravity(),
-            'wasAHit' => $model->getWasAHit(),
-            'targetId' => $model->getTargetId(),
-            'userId' => $model->getUserId(),
-            'userAgentString' => $model->getUserAgentString(),
-        );
+        if (empty($data)) {
+            $data = array(
+                'angle' => $model->getAngle(),
+                'velocity' => $model->getVelocity(),
+                'initialAltitude' => $model->getInitialAltitude(),
+                'gravity' => $model->getGravity(),
+                'wasAHit' => $model->getWasAHit(),
+                'targetId' => $model->getTargetId(),
+                'userId' => $model->getUserId(),
+                'userAgentString' => $model->getUserAgentString(),
+            );
+        }
         return parent::save($data);
     }
 
@@ -74,7 +76,7 @@ class Shot
      * 
      * @param int $shotId
      */
-    public function load($shotId)
+    public function load($shotId, $field = 'shotId')
     {
         if (!is_int($shotId)) {
             //throw new \InvalidArgumentException('Invalid value given for shot ID.');

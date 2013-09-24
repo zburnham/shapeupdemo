@@ -10,7 +10,7 @@ namespace Shapeup\Service;
 
 use Shapeup\Hydrator\BaseHydrator;
 
-use Zend\Db\TableGateway;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\InputFilter\InputFilter;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceManager;
@@ -109,7 +109,10 @@ class AbstractServiceClass
                 $this->setIsDataValidated(TRUE);
             }
         }
-        return $this->getDb()->insert($data);
+        $db = $this->getDb();
+        $db->insert($data);
+        $this->setLastInsertId($db->getLastInsertValue());
+        return $db->getLastInsertValue();
     }
     
     /**
@@ -117,6 +120,7 @@ class AbstractServiceClass
      * 
      * @param string $value
      * @param string $field
+     * @return array
      */
     public function load($value, $field = NULL) 
     {
@@ -124,12 +128,16 @@ class AbstractServiceClass
         $db = $this->getDb();
         if (NULL === $field) {
             $tableName = strtolower($this->getDb()->getTable());
-            $field = rtrim($tableName,'s') . 'Id';
+            $field = rtrim($tableName, 's') . 'Id';
         }
         $result = $db->select(array($field => $value));
-        
-        $this->setLastInsertId($db->getLastInsertValue());
-        $this->hydrate($result->toArray());
+        if (0 == $result->count()) {
+            return FALSE;
+        } else {
+            return $result->toArray();
+        }
+        throw new \Exception('Something really went wrong with load().. The row count is' . $result->count());
+       
     }
     
     /**

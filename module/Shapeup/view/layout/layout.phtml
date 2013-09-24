@@ -1,2 +1,17 @@
-<?php echo $this->doctype(); ?>
-<?php echo $this->content; ?>
+<?=$this->doctype(); ?>
+<html>
+    <head>
+        <title>Welcome to the Howitzer show.</title>
+        <link rel="stylesheet" type="text/css" href="/css/shapeup.css">
+    </head>
+    
+    <body>
+        <div id="header">
+            Boom!
+            <div id="headerleft"><?=$this->top5();?></div>
+            <div id="headerright"><?=$this->login();?></div>
+        </div>
+
+<?=$this->content; ?>
+    </body>
+</html>
